@@ -11,6 +11,7 @@ import re
 import sys
 from PyQt5.QtWidgets import *
 
+#123
 ## 1.function1: Delete CPCT non-effectively date ---Start-------------------------------------------------------------------------------------------
 def cpct_checker():
     ## Let user enters the effectively date, so get "text2" (Please refer to function1-1)
