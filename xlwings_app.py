@@ -1099,7 +1099,7 @@ def quote_consolidation():
         df_quote_av_not_duplicate = df_quote_avsummary[~df_quote_avsummary.duplicated(subset=['AV',new_effective_day])]
         df_quote_av_same = df_quote_av_not_duplicate[df_quote_av_not_duplicate.duplicated(subset='AV')]['AV'].tolist()
         df_quote_avsummary.loc[df_quote_avsummary['AV'].isin(df_quote_av_same), 'Comment'] = 'Same AV With Different Cost'
-        df = df.append(df_quote_avsummary) 
+        df = pd.concat([df, df_quote_avsummary], ignore_index=True) 
         
 
 
@@ -1125,7 +1125,7 @@ def quote_consolidation():
         df_quote_sku_same = df_quote_skusummary[df_quote_skusummary.duplicated(subset='SKU')]
         df_quote_price_diff2 = df_quote_sku_same[~df_quote_sku_same.duplicated(subset=new_effective_day)]['SKU'].tolist()
         df_quote_skusummary.loc[df_quote_skusummary['SKU'].isin(df_quote_price_diff2), 'Comment'] = 'Same SKU With Different Cost'
-        df2 = df2.append(df_quote_skusummary)
+        df2 = pd.concat([df2, df_quote_skusummary], ignore_index=True)
 #        print(paths_quote)
         wb.close() # close file
         app.quit() # close app
