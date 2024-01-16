@@ -482,7 +482,7 @@ def quote_validation():
         df_quote_masterdata['ODM'] = odm_name
         df_quote_masterdata['Quote File Name'] = quote_file_name
     #     df_quote_avsummary = df_quote_avsummary[~df_quote_avsummary['AV'].isnull()] #delete row which SKU is null
-        df3 = df3.append(df_quote_masterdata) 
+        df3 = pd.concat([df3, df_quote_masterdata], ignore_index=True)
 
 
         df_quote_ckit.rename(columns={'HP Part #':'HP P/N', effective_column_name2:'Current Price'}, inplace=True)
@@ -490,14 +490,14 @@ def quote_validation():
         df_quote_ckit['ODM'] = odm_name
         df_quote_ckit['Quote File Name'] = quote_file_name
     #     df_quote_avsummary = df_quote_avsummary[~df_quote_avsummary['AV'].isnull()] #delete row which SKU is null
-        df = df.append(df_quote_ckit) 
+        df = pd.concat([df, df_quote_ckit], ignore_index=True)
 
         df_quote_busa.rename(columns={effective_column_name3:'HP P/N'}, inplace=True)
         df_quote_busa['Platform'] = platform_name
         df_quote_busa['ODM'] = odm_name
         df_quote_busa['Quote File Name'] = quote_file_name
     #     df_quote_avsummary = df_quote_avsummary[~df_quote_avsummary['AV'].isnull()] #delete row which SKU is null
-        df2 = df2.append(df_quote_busa) 
+        df2 = pd.concat([df2, df_quote_busa], ignore_index=True)
         print(paths_quote)
         wb.close() # close file
         app.quit() # close app
